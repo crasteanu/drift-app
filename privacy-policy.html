@@ -1,98 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drift — Privacy Policy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Drift Dream Journal</title>
   <style>
-    body {
-      font-family: -apple-system, sans-serif;
-      max-width: 680px;
-      margin: 60px auto;
-      padding: 0 24px;
-      color: #1a1a2e;
-      line-height: 1.7;
+    :root {
+      --bg:       #080810;
+      --surface:  #12122a;
+      --card:     #191930;
+      --border:   #252545;
+      --lavender: #a78bfa;
+      --teal:     #2dd4bf;
+      --text:     #e8e8f5;
+      --muted:    #7878a0;
+      --faint:    #3a3a60;
     }
-    h1 { font-size: 28px; margin-bottom: 4px; }
-    h2 { font-size: 18px; margin-top: 36px; }
-    .updated { color: #888; font-size: 14px; margin-bottom: 40px; }
-    a { color: #7c6af7; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      padding: 0 16px 80px;
+    }
+
+    /* Header */
+    header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wordmark {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 36px;
+      font-weight: bold;
+      background: linear-gradient(90deg, var(--lavender), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Layout */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-top: 48px;
+    }
+
+    section {
+      margin-bottom: 44px;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 14px;
+    }
+
+    p { color: var(--text); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+
+    ul li {
+      padding: 10px 14px 10px 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      position: relative;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    ul li::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      font-size: 15px;
+    }
+
+    /* Callout box */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .callout strong { color: var(--teal); }
+
+    /* Third-party table */
+    .third-party {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .third-party-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .third-party-row:last-child { border-bottom: none; }
+
+    .third-party-row .label {
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .third-party-row .value {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    a { color: var(--lavender); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 480px) {
+      .third-party-row { grid-template-columns: 1fr; }
+      .third-party-row .label { border-right: none; border-bottom: 1px solid var(--border); }
+    }
   </style>
 </head>
 <body>
 
+<header>
+  <div class="wordmark">drift.</div>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: April 2026</p>
+  <p>Effective date: April 19, 2026 &nbsp;·&nbsp; Last updated: April 19, 2026</p>
+</header>
 
-  <p>Drift ("we", "our", or "the app") is an AI dream journal for iOS.
-  We built Drift with privacy as a core principle. This policy explains
-  exactly what data we collect, how it is used, and your rights.</p>
+<main>
 
-  <h2>1. Data We Collect</h2>
-  <p>Drift collects only what is necessary to provide the service:</p>
-  <ul>
-    <li><strong>Dream entries</strong> — the text of dreams you record
-    or type, stored locally on your device using Apple's Swift Data
-    framework.</li>
-    <li><strong>Voice recordings</strong> — audio recorded through your
-    microphone is transcribed on-device using Apple's SFSpeechRecognizer.
-    The audio file is never uploaded to any server.</li>
-    <li><strong>Dream text for AI analysis</strong> — when you tap
-    "Interpret my dream", the text of your dream (not audio) is sent to
-    Anthropic's API to generate a psychological reflection. See Section 3.</li>
-  </ul>
+  <section>
+    <h2>Overview</h2>
+    <p>
+      Drift is a private dream journal. It is built around a single principle:
+      <strong>your dreams stay yours</strong>. No account is required to use the
+      app. No personal data is stored on any server we operate. No data is sold,
+      shared, or used for advertising — ever.
+    </p>
+    <p>
+      This policy explains precisely what data Drift handles, where it goes, and
+      how you remain in control of it.
+    </p>
+  </section>
 
-  <h2>2. Data We Do NOT Collect</h2>
-  <ul>
-    <li>No account or registration is required</li>
-    <li>No name, email address, or personal identifiers</li>
-    <li>No location data</li>
-    <li>No device tracking or advertising identifiers (no IDFA)</li>
-    <li>No analytics or usage tracking</li>
-    <li>No audio recordings uploaded to any server</li>
-    <li>No data sold to third parties — ever</li>
-  </ul>
+  <section>
+    <h2>Data stored on your device</h2>
+    <p>
+      All dream entries, tags, symbols, transcriptions, and patterns are stored
+      exclusively in <strong>SwiftData</strong> on your device. This data never
+      leaves your phone unless you explicitly share it yourself.
+    </p>
+    <ul>
+      <li data-icon="📓">Dream text, titles, tags, and emotion metadata</li>
+      <li data-icon="🗓">Recording dates and journal history</li>
+      <li data-icon="🔮">Symbol library and detected patterns</li>
+      <li data-icon="🔑">Your Anthropic API key, encrypted in the iOS Keychain</li>
+    </ul>
+    <p>
+      Drift does not operate a backend. There is no Drift account, no user
+      profile, and no cloud sync.
+    </p>
+  </section>
 
-  <h2>3. Third-Party Services</h2>
-  <p><strong>Anthropic API</strong> — dream text is sent to Anthropic
-  (anthropic.com) solely to generate AI interpretations. Anthropic's
-  privacy policy applies to this data: anthropic.com/privacy.
-  Anthropic does not use API inputs to train their models by default.
-  No personally identifiable information is included in these requests.</p>
+  <section>
+    <h2>Voice &amp; transcription</h2>
+    <div class="callout">
+      <strong>Audio never leaves your device.</strong> Voice recordings are
+      transcribed entirely on-device using Apple's
+      <strong>SFSpeechRecognizer</strong> framework. Drift does not record,
+      store, or transmit raw audio files.
+    </div>
+    <p>
+      Transcription happens locally in real time. Once a recording session ends,
+      only the resulting text is retained — audio is discarded immediately.
+      Apple's on-device speech framework is governed by
+      <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">
+        Apple's Privacy Policy</a>.
+    </p>
+  </section>
 
-  <p><strong>Apple SFSpeechRecognizer</strong> — voice transcription
-  is performed on-device. No audio leaves your iPhone.</p>
+  <section>
+    <h2>AI dream analysis (Claude API)</h2>
+    <p>
+      When you request an AI interpretation of a dream, Drift sends the
+      <em>transcribed text only</em> to the
+      <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>
+      Claude API using <strong>your own API key</strong>. The following applies:
+    </p>
+    <ul>
+      <li data-icon="📤">Only the dream text is transmitted — no name, device ID, or metadata</li>
+      <li data-icon="🚫">Drift does not log, store, or forward API responses to any server</li>
+      <li data-icon="🔐">Your API key is stored in the iOS Keychain and transmitted only over HTTPS</li>
+      <li data-icon="🏢">Anthropic may process transmitted text per their own usage policies</li>
+    </ul>
 
-  <p><strong>Apple StoreKit</strong> — subscription purchases are
-  handled entirely by Apple. We do not process or store payment
-  information.</p>
+    <div class="third-party">
+      <div class="third-party-row">
+        <div class="label">Provider</div>
+        <div class="value">Anthropic, PBC</div>
+      </div>
+      <div class="third-party-row">
+        <div class="label">Purpose</div>
+        <div class="value">Dream interpretation and symbol analysis</div>
+      </div>
+      <div class="third-party-row">
+        <div class="label">Data sent</div>
+        <div class="value">Dream transcription text only</div>
+      </div>
+      <div class="third-party-row">
+        <div class="label">Anthropic privacy</div>
+        <div class="value">
+          <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">
+            anthropic.com/privacy
+          </a>
+        </div>
+      </div>
+    </div>
 
-  <h2>4. Data Storage</h2>
-  <p>All your dream entries, symbols, and pattern data are stored
-  locally on your device using Swift Data. This data is included in
-  your standard iOS device backup (iCloud or iTunes) if you have
-  backups enabled. We do not operate any servers that store your
-  personal data.</p>
+    <p>
+      AI analysis is always user-initiated. Drift never sends data to the Claude
+      API automatically or in the background.
+    </p>
+  </section>
 
-  <h2>5. Data Deletion</h2>
-  <p>Deleting the Drift app from your iPhone permanently removes all
-  locally stored data. Individual dreams can be deleted from within
-  the Journal screen at any time.</p>
+  <section>
+    <h2>Purchases &amp; subscriptions</h2>
+    <p>
+      Drift offers an optional Pro subscription through
+      <strong>Apple's In-App Purchase</strong> system (StoreKit). All billing,
+      payment processing, and subscription management is handled entirely by
+      Apple. Drift never sees your payment information.
+    </p>
+    <p>
+      Apple's handling of purchase data is governed by
+      <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">
+        Apple's Privacy Policy</a>.
+    </p>
+  </section>
 
-  <h2>6. Children's Privacy</h2>
-  <p>Drift is not directed at children under 13. We do not knowingly
-  collect data from children under 13.</p>
+  <section>
+    <h2>Analytics, advertising &amp; tracking</h2>
+    <ul>
+      <li data-icon="📊">No analytics SDKs (no Firebase, Mixpanel, Amplitude, etc.)</li>
+      <li data-icon="📣">No advertising networks or ad identifiers</li>
+      <li data-icon="👁">No crash reporting services that transmit data externally</li>
+      <li data-icon="🌐">No third-party trackers or cross-app tracking</li>
+    </ul>
+    <p>
+      Drift does not request permission to track you across other apps or
+      websites, and does not participate in any advertising ecosystem.
+    </p>
+  </section>
 
-  <h2>7. Changes to This Policy</h2>
-  <p>If we make material changes to this privacy policy, we will
-  update the "Last updated" date at the top of this page. Continued
-  use of the app after changes constitutes acceptance of the
-  updated policy.</p>
+  <section>
+    <h2>Permissions requested</h2>
+    <ul>
+      <li data-icon="🎙">
+        <strong>Microphone</strong> — required to record your voice for dream
+        transcription. Audio is processed on-device only.
+      </li>
+      <li data-icon="💬">
+        <strong>Speech Recognition</strong> — required to transcribe recordings
+        locally via SFSpeechRecognizer.
+      </li>
+    </ul>
+    <p>
+      No other system permissions (location, contacts, photos, camera, health,
+      notifications) are requested or used.
+    </p>
+  </section>
 
-  <h2>8. Contact</h2>
-  <p>Questions about this privacy policy? Contact us at:
-  <a href="mailto:hello@driftapp.io">claudiu_rasteanu@live.com</a><br>
-  (replace with your actual contact email)</p>
+  <section>
+    <h2>Your data, your control</h2>
+    <p>
+      Because all data lives on your device, you are always in full control:
+    </p>
+    <ul>
+      <li data-icon="🗑">
+        <strong>Delete all data</strong> — available in Settings → Delete All
+        Data. This permanently removes all dreams, symbols, and patterns from
+        the app's SwiftData store.
+      </li>
+      <li data-icon="🔑">
+        <strong>Remove your API key</strong> — you can clear or replace your
+        Anthropic API key at any time in Settings → API Key.
+      </li>
+      <li data-icon="📱">
+        <strong>Uninstall</strong> — deleting the app from your device removes
+        all associated local data permanently.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Disclaimer</h2>
+    <p>
+      All dream interpretations and analyses provided by Drift are
+      <strong>symbolic and for entertainment purposes only</strong>. They do not
+      constitute medical, psychological, legal, financial, or any other form of
+      professional advice.
+    </p>
+    <p>
+      Drift and its developers assume <strong>no responsibility or liability</strong>
+      for any decisions, actions, or outcomes arising from the use of the app or
+      its AI-generated interpretations. Always consult a qualified professional
+      for matters affecting your health, wellbeing, or any other significant area
+      of your life.
+    </p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy changes materially, the updated version will be posted at
+      this URL with a revised effective date. Continued use of Drift after a
+      policy update constitutes acceptance of the revised terms.
+    </p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy or Drift's data practices can be sent to:<br />
+      <a href="mailto:driftapp@gmail.com">driftapp@gmail.com</a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Drift. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
