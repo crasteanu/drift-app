@@ -1,0 +1,620 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB000100000000000000001 /* DriftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000100000000000000001 /* DriftApp.swift */; };
+		BB000200000000000000001 /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000200000000000000001 /* Dream.swift */; };
+		BB000300000000000000001 /* DreamSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000300000000000000001 /* DreamSymbol.swift */; };
+		BB000400000000000000001 /* ClaudeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000400000000000000001 /* ClaudeService.swift */; };
+		BB000500000000000000001 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000500000000000000001 /* RecordingService.swift */; };
+		BB000600000000000000001 /* WhisperKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000600000000000000001 /* WhisperKitService.swift */; };
+		BB000700000000000000001 /* MoonPhaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000700000000000000001 /* MoonPhaseService.swift */; };
+		BB000800000000000000001 /* PatternEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000800000000000000001 /* PatternEngine.swift */; };
+		BB000900000000000000001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000900000000000000001 /* ContentView.swift */; };
+		BB001000000000000000001 /* TonightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001000000000000000001 /* TonightView.swift */; };
+		BB001100000000000000001 /* MoonPhaseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001100000000000000001 /* MoonPhaseCard.swift */; };
+		BB001200000000000000001 /* RecordCTACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001200000000000000001 /* RecordCTACard.swift */; };
+		BB001300000000000000001 /* YearInDreamsTeaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001300000000000000001 /* YearInDreamsTeaser.swift */; };
+		BB001400000000000000001 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001400000000000000001 /* RecordView.swift */; };
+		BB001500000000000000001 /* OrbVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001500000000000000001 /* OrbVisualizer.swift */; };
+		BB001600000000000000001 /* ReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001600000000000000001 /* ReflectionView.swift */; };
+		BB001700000000000000001 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001700000000000000001 /* LoadingView.swift */; };
+		BB001800000000000000001 /* ReflectionCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001800000000000000001 /* ReflectionCards.swift */; };
+		BB001900000000000000001 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001900000000000000001 /* JournalView.swift */; };
+		BB002000000000000000001 /* DreamRowCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002000000000000000001 /* DreamRowCard.swift */; };
+		BB003000000000000000001 /* DreamEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003000000000000000001 /* DreamEditView.swift */; };
+		BB002100000000000000001 /* PatternsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002100000000000000001 /* PatternsView.swift */; };
+		BB002200000000000000001 /* YearInDreamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002200000000000000001 /* YearInDreamsView.swift */; };
+		BB002300000000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002300000000000000001 /* SettingsView.swift */; };
+		BB002400000000000000001 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002400000000000000001 /* PrivacyView.swift */; };
+		BB002500000000000000001 /* DriftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002500000000000000001 /* DriftColors.swift */; };
+		BB002600000000000000001 /* DriftFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002600000000000000001 /* DriftFonts.swift */; };
+		BB002700000000000000001 /* TagChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002700000000000000001 /* TagChip.swift */; };
+		BB003100000000000000001 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003100000000000000001 /* WelcomeView.swift */; };
+		BB002800000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC002800000000000000001 /* Assets.xcassets */; };
+		BB002900000000000000001 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = PRD00100000000000000001 /* WhisperKit */; };
+		FF000100000000000000001 /* CormorantGaramond-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000100000000000000001 /* CormorantGaramond-Regular.ttf */; };
+		FF000200000000000000001 /* CormorantGaramond-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000200000000000000001 /* CormorantGaramond-Italic.ttf */; };
+		FF000300000000000000001 /* CormorantGaramond-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000300000000000000001 /* CormorantGaramond-SemiBold.ttf */; };
+		FF000400000000000000001 /* CormorantGaramond-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000400000000000000001 /* CormorantGaramond-SemiBoldItalic.ttf */; };
+		FF000500000000000000001 /* CormorantGaramond-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000500000000000000001 /* CormorantGaramond-Bold.ttf */; };
+		FF000600000000000000001 /* CormorantGaramond-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000600000000000000001 /* CormorantGaramond-BoldItalic.ttf */; };
+		FF000700000000000000001 /* Outfit-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000700000000000000001 /* Outfit-Light.ttf */; };
+		FF000800000000000000001 /* Outfit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000800000000000000001 /* Outfit-Regular.ttf */; };
+		FF000900000000000000001 /* Outfit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000900000000000000001 /* Outfit-Medium.ttf */; };
+		FF001000000000000000001 /* Outfit-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC001000000000000000001 /* Outfit-SemiBold.ttf */; };
+		FF001100000000000000001 /* Outfit-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC001100000000000000001 /* Outfit-Bold.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CC000000000000000000001 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC000100000000000000001 /* DriftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftApp.swift; sourceTree = "<group>"; };
+		CC000200000000000000001 /* Dream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
+		CC000300000000000000001 /* DreamSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamSymbol.swift; sourceTree = "<group>"; };
+		CC000400000000000000001 /* ClaudeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeService.swift; sourceTree = "<group>"; };
+		CC000500000000000000001 /* RecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
+		CC000600000000000000001 /* WhisperKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperKitService.swift; sourceTree = "<group>"; };
+		CC000700000000000000001 /* MoonPhaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseService.swift; sourceTree = "<group>"; };
+		CC000800000000000000001 /* PatternEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEngine.swift; sourceTree = "<group>"; };
+		CC000900000000000000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CC001000000000000000001 /* TonightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonightView.swift; sourceTree = "<group>"; };
+		CC001100000000000000001 /* MoonPhaseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseCard.swift; sourceTree = "<group>"; };
+		CC001200000000000000001 /* RecordCTACard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCTACard.swift; sourceTree = "<group>"; };
+		CC001300000000000000001 /* YearInDreamsTeaser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearInDreamsTeaser.swift; sourceTree = "<group>"; };
+		CC001400000000000000001 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		CC001500000000000000001 /* OrbVisualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbVisualizer.swift; sourceTree = "<group>"; };
+		CC001600000000000000001 /* ReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionView.swift; sourceTree = "<group>"; };
+		CC001700000000000000001 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CC001800000000000000001 /* ReflectionCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionCards.swift; sourceTree = "<group>"; };
+		CC001900000000000000001 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		CC002000000000000000001 /* DreamRowCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamRowCard.swift; sourceTree = "<group>"; };
+		CC003000000000000000001 /* DreamEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamEditView.swift; sourceTree = "<group>"; };
+		CC002100000000000000001 /* PatternsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsView.swift; sourceTree = "<group>"; };
+		CC002200000000000000001 /* YearInDreamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearInDreamsView.swift; sourceTree = "<group>"; };
+		CC002300000000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CC002400000000000000001 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
+		CC002500000000000000001 /* DriftColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftColors.swift; sourceTree = "<group>"; };
+		CC002600000000000000001 /* DriftFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftFonts.swift; sourceTree = "<group>"; };
+		CC002700000000000000001 /* TagChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagChip.swift; sourceTree = "<group>"; };
+		CC003100000000000000001 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		CC002800000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CC002900000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC000100000000000000001 /* CormorantGaramond-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-Regular.ttf"; sourceTree = "<group>"; };
+		FC000200000000000000001 /* CormorantGaramond-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-Italic.ttf"; sourceTree = "<group>"; };
+		FC000300000000000000001 /* CormorantGaramond-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-SemiBold.ttf"; sourceTree = "<group>"; };
+		FC000400000000000000001 /* CormorantGaramond-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		FC000500000000000000001 /* CormorantGaramond-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-Bold.ttf"; sourceTree = "<group>"; };
+		FC000600000000000000001 /* CormorantGaramond-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-BoldItalic.ttf"; sourceTree = "<group>"; };
+		FC000700000000000000001 /* Outfit-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Light.ttf"; sourceTree = "<group>"; };
+		FC000800000000000000001 /* Outfit-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Regular.ttf"; sourceTree = "<group>"; };
+		FC000900000000000000001 /* Outfit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Medium.ttf"; sourceTree = "<group>"; };
+		FC001000000000000000001 /* Outfit-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-SemiBold.ttf"; sourceTree = "<group>"; };
+		FC001100000000000000001 /* Outfit-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Bold.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FW000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB002900000000000000001 /* WhisperKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		GG000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				GG000100000000000000001 /* Drift */,
+				GG000200000000000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		GG000100000000000000001 /* Drift */ = {
+			isa = PBXGroup;
+			children = (
+				CC000100000000000000001 /* DriftApp.swift */,
+				CC002900000000000000001 /* Info.plist */,
+				GG000300000000000000001 /* Models */,
+				GG000400000000000000001 /* Services */,
+				GG000500000000000000001 /* Views */,
+				GG001300000000000000001 /* Resources */,
+			);
+			path = Drift;
+			sourceTree = "<group>";
+		};
+		GG000200000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC000000000000000000001 /* Drift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		GG000300000000000000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CC000200000000000000001 /* Dream.swift */,
+				CC000300000000000000001 /* DreamSymbol.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		GG000400000000000000001 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CC000400000000000000001 /* ClaudeService.swift */,
+				CC000500000000000000001 /* RecordingService.swift */,
+				CC000600000000000000001 /* WhisperKitService.swift */,
+				CC000700000000000000001 /* MoonPhaseService.swift */,
+				CC000800000000000000001 /* PatternEngine.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		GG000500000000000000001 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC000900000000000000001 /* ContentView.swift */,
+				GG000600000000000000001 /* Tonight */,
+				GG000700000000000000001 /* Record */,
+				GG000800000000000000001 /* Reflection */,
+				GG000900000000000000001 /* Journal */,
+				GG001000000000000000001 /* Patterns */,
+				GG001100000000000000001 /* YearInDreams */,
+				GG001200000000000000001 /* Settings */,
+				GG001400000000000000001 /* Shared */,
+			GG001600000000000000001 /* Welcome */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		GG000600000000000000001 /* Tonight */ = {
+			isa = PBXGroup;
+			children = (
+				CC001000000000000000001 /* TonightView.swift */,
+				CC001100000000000000001 /* MoonPhaseCard.swift */,
+				CC001200000000000000001 /* RecordCTACard.swift */,
+				CC001300000000000000001 /* YearInDreamsTeaser.swift */,
+			);
+			path = Tonight;
+			sourceTree = "<group>";
+		};
+		GG000700000000000000001 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				CC001400000000000000001 /* RecordView.swift */,
+				CC001500000000000000001 /* OrbVisualizer.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		GG000800000000000000001 /* Reflection */ = {
+			isa = PBXGroup;
+			children = (
+				CC001600000000000000001 /* ReflectionView.swift */,
+				CC001700000000000000001 /* LoadingView.swift */,
+				CC001800000000000000001 /* ReflectionCards.swift */,
+			);
+			path = Reflection;
+			sourceTree = "<group>";
+		};
+		GG000900000000000000001 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				CC001900000000000000001 /* JournalView.swift */,
+				CC002000000000000000001 /* DreamRowCard.swift */,
+				CC003000000000000000001 /* DreamEditView.swift */,
+			);
+			path = Journal;
+			sourceTree = "<group>";
+		};
+		GG001000000000000000001 /* Patterns */ = {
+			isa = PBXGroup;
+			children = (
+				CC002100000000000000001 /* PatternsView.swift */,
+			);
+			path = Patterns;
+			sourceTree = "<group>";
+		};
+		GG001100000000000000001 /* YearInDreams */ = {
+			isa = PBXGroup;
+			children = (
+				CC002200000000000000001 /* YearInDreamsView.swift */,
+			);
+			path = YearInDreams;
+			sourceTree = "<group>";
+		};
+		GG001200000000000000001 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CC002300000000000000001 /* SettingsView.swift */,
+				CC002400000000000000001 /* PrivacyView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		GG001300000000000000001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CC002800000000000000001 /* Assets.xcassets */,
+				GG001500000000000000001 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		GG001400000000000000001 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CC002500000000000000001 /* DriftColors.swift */,
+				CC002600000000000000001 /* DriftFonts.swift */,
+				CC002700000000000000001 /* TagChip.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		GG001600000000000000001 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				CC003100000000000000001 /* WelcomeView.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		GG001500000000000000001 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FC000100000000000000001 /* CormorantGaramond-Regular.ttf */,
+				FC000200000000000000001 /* CormorantGaramond-Italic.ttf */,
+				FC000300000000000000001 /* CormorantGaramond-SemiBold.ttf */,
+				FC000400000000000000001 /* CormorantGaramond-SemiBoldItalic.ttf */,
+				FC000500000000000000001 /* CormorantGaramond-Bold.ttf */,
+				FC000600000000000000001 /* CormorantGaramond-BoldItalic.ttf */,
+				FC000700000000000000001 /* Outfit-Light.ttf */,
+				FC000800000000000000001 /* Outfit-Regular.ttf */,
+				FC000900000000000000001 /* Outfit-Medium.ttf */,
+				FC001000000000000000001 /* Outfit-SemiBold.ttf */,
+				FC001100000000000000001 /* Outfit-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		TT000000000000000000001 /* Drift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CL000000000000000000002 /* Build configuration list for PBXNativeTarget "Drift" */;
+			buildPhases = (
+				SR000000000000000000001 /* Sources */,
+				FW000000000000000000001 /* Frameworks */,
+				RS000000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Drift;
+			packageProductDependencies = (
+				PRD00100000000000000001 /* WhisperKit */,
+			);
+			productName = Drift;
+			productReference = CC000000000000000000001 /* Drift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		PJ000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					TT000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = CL000000000000000000001 /* Build configuration list for PBXProject "Drift" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = GG000000000000000000001;
+			packageReferences = (
+				PKG00100000000000000001 /* XCRemoteSwiftPackageReference "WhisperKit" */,
+			);
+			productRefGroup = GG000200000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				TT000000000000000000001 /* Drift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		RS000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB002800000000000000001 /* Assets.xcassets in Resources */,
+				FF000100000000000000001 /* CormorantGaramond-Regular.ttf in Resources */,
+				FF000200000000000000001 /* CormorantGaramond-Italic.ttf in Resources */,
+				FF000300000000000000001 /* CormorantGaramond-SemiBold.ttf in Resources */,
+				FF000400000000000000001 /* CormorantGaramond-SemiBoldItalic.ttf in Resources */,
+				FF000500000000000000001 /* CormorantGaramond-Bold.ttf in Resources */,
+				FF000600000000000000001 /* CormorantGaramond-BoldItalic.ttf in Resources */,
+				FF000700000000000000001 /* Outfit-Light.ttf in Resources */,
+				FF000800000000000000001 /* Outfit-Regular.ttf in Resources */,
+				FF000900000000000000001 /* Outfit-Medium.ttf in Resources */,
+				FF001000000000000000001 /* Outfit-SemiBold.ttf in Resources */,
+				FF001100000000000000001 /* Outfit-Bold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		SR000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB000100000000000000001 /* DriftApp.swift in Sources */,
+				BB000200000000000000001 /* Dream.swift in Sources */,
+				BB000300000000000000001 /* DreamSymbol.swift in Sources */,
+				BB000400000000000000001 /* ClaudeService.swift in Sources */,
+				BB000500000000000000001 /* RecordingService.swift in Sources */,
+				BB000600000000000000001 /* WhisperKitService.swift in Sources */,
+				BB000700000000000000001 /* MoonPhaseService.swift in Sources */,
+				BB000800000000000000001 /* PatternEngine.swift in Sources */,
+				BB000900000000000000001 /* ContentView.swift in Sources */,
+				BB001000000000000000001 /* TonightView.swift in Sources */,
+				BB001100000000000000001 /* MoonPhaseCard.swift in Sources */,
+				BB001200000000000000001 /* RecordCTACard.swift in Sources */,
+				BB001300000000000000001 /* YearInDreamsTeaser.swift in Sources */,
+				BB001400000000000000001 /* RecordView.swift in Sources */,
+				BB001500000000000000001 /* OrbVisualizer.swift in Sources */,
+				BB001600000000000000001 /* ReflectionView.swift in Sources */,
+				BB001700000000000000001 /* LoadingView.swift in Sources */,
+				BB001800000000000000001 /* ReflectionCards.swift in Sources */,
+				BB001900000000000000001 /* JournalView.swift in Sources */,
+				BB002000000000000000001 /* DreamRowCard.swift in Sources */,
+				BB003000000000000000001 /* DreamEditView.swift in Sources */,
+				BB002100000000000000001 /* PatternsView.swift in Sources */,
+				BB002200000000000000001 /* YearInDreamsView.swift in Sources */,
+				BB002300000000000000001 /* SettingsView.swift in Sources */,
+				BB002400000000000000001 /* PrivacyView.swift in Sources */,
+				BB002500000000000000001 /* DriftColors.swift in Sources */,
+				BB002600000000000000001 /* DriftFonts.swift in Sources */,
+				BB002700000000000000001 /* TagChip.swift in Sources */,
+				BB003100000000000000001 /* WelcomeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		XB000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BF4TRP4NPJ;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		XB000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BF4TRP4NPJ;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		XB000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Drift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.claudiurasteanu.drift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		XB000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Drift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.claudiurasteanu.drift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CL000000000000000000001 /* Build configuration list for PBXProject "Drift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				XB000000000000000000001 /* Debug */,
+				XB000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CL000000000000000000002 /* Build configuration list for PBXNativeTarget "Drift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				XB000000000000000000003 /* Debug */,
+				XB000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		PKG00100000000000000001 /* XCRemoteSwiftPackageReference "WhisperKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argmaxinc/WhisperKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		PRD00100000000000000001 /* WhisperKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = PKG00100000000000000001 /* XCRemoteSwiftPackageReference "WhisperKit" */;
+			productName = WhisperKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = PJ000000000000000000001 /* Project object */;
+}
