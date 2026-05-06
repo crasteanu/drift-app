@@ -59,8 +59,8 @@ struct RecordView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("Record a Dream")
-                        .font(.outfit(15, weight: .semibold))
-                        .foregroundColor(.driftTagGreen)
+                        .font(.cormorant(28, weight: .bold, italic: true))
+                        .foregroundStyle(LinearGradient.driftTealPurple)
                 }
             }
         }
