@@ -51,7 +51,8 @@ final class WhisperKitService: ObservableObject {
         options.task = .transcribe
         options.chunkingStrategy = .vad
 
-        let results = try await wk.transcribe(audioPath: url.path, decodeOptions: options)
+        let resolvedPath = url.resolvingSymlinksInPath().path(percentEncoded: false)
+        let results = try await wk.transcribe(audioPath: resolvedPath, decodeOptions: options)
         return results.map { $0.text }.joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
