@@ -7,7 +7,7 @@ struct RecordView: View {
     @StateObject private var recorder = RecordingService()
     @Query(sort: \Dream.date, order: .reverse) private var dreams: [Dream]
 
-    @State private var mode: InterpretationMode = .both
+    @State private var mode: String = InterpretationMode.both.rawValue
     @State private var showTextInput = false
     @FocusState private var isTextEditorFocused: Bool
     @State private var manualText = ""
@@ -17,20 +17,6 @@ struct RecordView: View {
     @State private var interpretation: DreamInterpretation?
     @State private var error: String?
     @AppStorage("whisperLanguage") private var language = "ro"
-
-    enum InterpretationMode: String, CaseIterable {
-        case inner    = "inner"
-        case esoteric = "esoteric"
-        case both     = "both"
-
-        var label: String {
-            switch self {
-            case .inner:    return "🧠 Inner"
-            case .esoteric: return "🔮 Esoteric"
-            case .both:     return "✨ Both"
-            }
-        }
-    }
 
     enum ProcessingState {
         case idle, recording, transcribing, transcribed, interpreting, done, error(String)
@@ -50,7 +36,7 @@ struct RecordView: View {
                     ReflectionView(
                         interpretation: interp,
                         transcript: transcript,
-                        mode: mode.rawValue,
+                        mode: mode,
                         recordingDuration: recordingDuration,
                         dreams: Array(dreams),
                         onRetry: resetState,
@@ -86,6 +72,9 @@ struct RecordView: View {
                 }
             }
         }
+        .onDisappear {
+            if case .done = processingState { resetState() }
+        }
         .task {
             await whisperService.prepare()
         }
@@ -106,23 +95,7 @@ struct RecordView: View {
 
             // Mode selector
             VStack(spacing: 8) {
-                HStack(spacing: 6) {
-                    ForEach(InterpretationMode.allCases, id: \.self) { m in
-                        Button {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) { mode = m }
-                        } label: {
-                            Text(m.label)
-                                .font(.outfit(13, weight: mode == m ? .semibold : .regular))
-                                .foregroundColor(mode == m ? .white : .white.opacity(0.45))
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 9)
-                                .background(mode == m ? Color.driftPurple : Color.driftCard)
-                                .clipShape(Capsule())
-                                .overlay(mode == m ? nil : Capsule().stroke(Color.white.opacity(0.12), lineWidth: 1))
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+                ModePickerView(selected: $mode)
 
                 Text("Interpretation style")
                     .font(.outfit(11))
@@ -227,7 +200,7 @@ struct RecordView: View {
                         Text("Type instead")
                             .font(.outfit(14, weight: .semibold))
                     }
-                    .foregroundColor(Color(hex: "#F5E642"))
+                    .foregroundColor(.driftYellow)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
                     .background(Color.driftCard)
@@ -356,23 +329,7 @@ struct RecordView: View {
                         .font(.outfit(12))
                         .foregroundColor(.white.opacity(0.35))
 
-                    HStack(spacing: 6) {
-                        ForEach(InterpretationMode.allCases, id: \.self) { m in
-                            Button {
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) { mode = m }
-                            } label: {
-                                Text(m.label)
-                                    .font(.outfit(13, weight: mode == m ? .semibold : .regular))
-                                    .foregroundColor(mode == m ? .white : .white.opacity(0.45))
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 9)
-                                    .background(mode == m ? Color.driftPurple : Color.driftCard)
-                                    .clipShape(Capsule())
-                                    .overlay(mode == m ? nil : Capsule().stroke(Color.white.opacity(0.12), lineWidth: 1))
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
+                    ModePickerView(selected: $mode)
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity)
@@ -436,6 +393,7 @@ struct RecordView: View {
             }
             do {
                 try await recorder.start()
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 withAnimation { processingState = .recording }
             } catch {
                 self.error = error.localizedDescription
@@ -444,6 +402,7 @@ struct RecordView: View {
     }
 
     private func stopAndTranscribe() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         recordingDuration = recorder.stop()
         guard let url = recorder.recordingURL else {
             self.error = "Recording file not found"
@@ -489,7 +448,7 @@ struct RecordView: View {
         do {
             let result = try await ClaudeService.interpret(
                 transcript: transcript,
-                mode: mode.rawValue,
+                mode: mode,
                 previousDreams: Array(dreams.prefix(3)),
                 language: language
             )

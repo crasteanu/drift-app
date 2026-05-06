@@ -6,6 +6,8 @@ struct JournalView: View {
     @State private var searchText = ""
     @State private var activeFilter: Filter = .all
     @State private var selectedDream: Dream?
+    @State private var cachedTotalSymbols: Int = 0
+    @State private var cachedGrouped: [(String, [Dream])] = []
 
     enum Filter: String, CaseIterable {
         case all = "All"
@@ -15,10 +17,6 @@ struct JournalView: View {
         case anxious = "Anxious"
     }
 
-    private var totalSymbols: Int {
-        PatternEngine.allSymbolLibrary(from: dreams).count
-    }
-
     private var filtered: [Dream] {
         var result = dreams
 
@@ -26,9 +24,11 @@ struct JournalView: View {
         case .all: break
         case .starred: result = result.filter { $0.isStarred }
         case .vivid:   result = result.filter { $0.vividness >= 70 }
-        case .anxious: result = result.filter {
-            $0.emotionalSignature.contains { $0.localizedCaseInsensitiveContains("anx") || $0.localizedCaseInsensitiveContains("fear") }
-        }
+        case .anxious:
+            let anxiousWords: Set<String> = ["anxiety", "anxious", "fear", "afraid", "stress", "stressed"]
+            result = result.filter {
+                $0.emotionalSignature.contains { anxiousWords.contains($0.lowercased()) }
+            }
         case .recurring:
             let allTags = dreams.flatMap { $0.tags }
             let tagFreq = Dictionary(grouping: allTags, by: { $0.lowercased() }).filter { $0.value.count > 1 }.keys
@@ -52,9 +52,10 @@ struct JournalView: View {
         return f
     }()
 
-    private var grouped: [(String, [Dream])] {
+    private func rebuildCache() {
+        cachedTotalSymbols = Set(dreams.flatMap { $0.symbols.map { $0.name.lowercased() } }).count
         let dict = Dictionary(grouping: filtered) { JournalView.groupFormatter.string(from: $0.date) }
-        return dict
+        cachedGrouped = dict
             .map { key, groupDreams -> (String, [Dream], Date) in
                 let sorted = groupDreams.sorted { $0.date > $1.date }
                 return (key, sorted, sorted.first?.date ?? .distantPast)
@@ -114,7 +115,7 @@ struct JournalView: View {
                     } else {
                         ScrollView {
                             LazyVStack(spacing: 16, pinnedViews: .sectionHeaders) {
-                                ForEach(grouped, id: \.0) { month, monthDreams in
+                                ForEach(cachedGrouped, id: \.0) { month, monthDreams in
                                     Section {
                                         ForEach(monthDreams) { dream in
                                             Button {
@@ -152,7 +153,7 @@ struct JournalView: View {
                         .foregroundStyle(LinearGradient.driftTealPurple)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Text("\(dreams.count) dreams · \(totalSymbols) symbols")
+                    Text("\(dreams.count) dreams · \(cachedTotalSymbols) symbols")
                         .font(.outfit(12, weight: .medium))
                         .foregroundColor(.driftTagGreen)
                 }
@@ -160,6 +161,10 @@ struct JournalView: View {
             .sheet(item: $selectedDream) { dream in
                 ReflectionView(dream: dream, isReadOnly: true)
             }
+            .onAppear { rebuildCache() }
+            .onChange(of: dreams) { rebuildCache() }
+            .onChange(of: searchText) { rebuildCache() }
+            .onChange(of: activeFilter) { rebuildCache() }
         }
     }
 }

@@ -8,7 +8,7 @@ struct MoonPhaseCard: View {
     private var streak: Int { PatternEngine.streak(from: dreams) }
     private var lastNightCount: Int {
         let cal = Calendar.current
-        let yesterday = cal.startOfDay(for: cal.date(byAdding: .day, value: -1, to: Date())!)
+        let yesterday = cal.startOfDay(for: cal.date(byAdding: .day, value: -1, to: Date()) ?? Date())
         // Include early-morning same-day recordings up to noon — a 7am entry is still "last night"
         let cutoff = cal.date(bySettingHour: 12, minute: 0, second: 0, of: Date()) ?? cal.startOfDay(for: Date())
         return dreams.filter { $0.date >= yesterday && $0.date < cutoff }.count
@@ -34,22 +34,28 @@ struct MoonPhaseCard: View {
 
             // Center: streak
             VStack(spacing: 2) {
-                HStack(spacing: 4) {
-                    Text("🔥")
-                    Text("\(streak)")
-                        .font(.outfit(20, weight: .bold))
+                if streak == 0 {
+                    Text("Start tonight")
+                        .font(.outfit(13))
                         .foregroundColor(.driftAmber)
+                } else {
+                    HStack(spacing: 4) {
+                        Text("🔥")
+                        Text("\(streak)")
+                            .font(.outfit(20, weight: .bold))
+                            .foregroundColor(.driftAmber)
+                    }
+                    Text(streak == 1 ? "day" : "days")
+                        .font(.outfit(11))
+                        .foregroundColor(.white.opacity(0.4))
                 }
-                Text(streak == 1 ? "day" : "days")
-                    .font(.outfit(11))
-                    .foregroundColor(.white.opacity(0.4))
             }
 
             Spacer()
 
             // Right: last night count
             VStack(spacing: 2) {
-                Text("\(lastNightCount)")
+                Text(lastNightCount == 0 ? "—" : "\(lastNightCount)")
                     .font(.outfit(20, weight: .bold))
                     .foregroundColor(.white)
                 Text("last night")

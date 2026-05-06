@@ -4,8 +4,6 @@ struct LoadingView: View {
     @State private var messageIndex = 0
     @State private var dotCount = 0
     @State private var orbScale: CGFloat = 1.0
-    @State private var dotTimer: Timer?
-    @State private var messageTimer: Timer?
 
     private let messages = [
         "Drifting through your dream...",
@@ -72,24 +70,18 @@ struct LoadingView: View {
                 Spacer()
             }
         }
-        .onAppear {
-            orbScale = 1.08
-            startCycling()
+        .onAppear { orbScale = 1.08 }
+        .task {
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .milliseconds(500))
+                withAnimation { dotCount = (dotCount + 1) % 3 }
+            }
         }
-        .onDisappear {
-            dotTimer?.invalidate()
-            messageTimer?.invalidate()
-            dotTimer = nil
-            messageTimer = nil
-        }
-    }
-
-    private func startCycling() {
-        dotTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-            withAnimation { dotCount = (dotCount + 1) % 3 }
-        }
-        messageTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-            withAnimation { messageIndex = (messageIndex + 1) % messages.count }
+        .task {
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(2))
+                withAnimation { messageIndex = (messageIndex + 1) % messages.count }
+            }
         }
     }
 }

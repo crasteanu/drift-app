@@ -102,7 +102,7 @@ enum ClaudeService {
         let systemPrompt = "You are a dream interpreter for the Drift app. Analyze the dream transcript and return ONLY valid JSON with no other text, no markdown code fences, no explanation."
 
         let body = CloudflareRequest(
-            model: "claude-sonnet-4-5",
+            model: "claude-sonnet-4-6",
             max_tokens: 4000,
             system: systemPrompt,
             messages: [.init(role: "user", content: userPrompt)]
@@ -134,14 +134,24 @@ enum ClaudeService {
             throw ClaudeError.emptyResponse
         }
 
-        // Strip any accidental markdown fences
-        let cleaned = text
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacingOccurrences(of: "```json", with: "")
-            .replacingOccurrences(of: "```", with: "")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+        // Try direct parse first (happy path — model followed instructions)
+        if let jsonData = text.data(using: .utf8),
+           let result = try? JSONDecoder().decode(DreamInterpretation.self, from: jsonData) {
+            return result
+        }
 
-        guard let jsonData = cleaned.data(using: .utf8) else {
+        // Extract the JSON object by finding the outermost braces.
+        // This safely handles accidental markdown fences or prose around the JSON
+        // without corrupting backticks that may appear inside string values.
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let startIdx = trimmed.firstIndex(of: "{"),
+              let endIdx = trimmed.lastIndex(of: "}"),
+              startIdx <= endIdx else {
+            throw ClaudeError.invalidJSON
+        }
+
+        let jsonString = String(trimmed[startIdx...endIdx])
+        guard let jsonData = jsonString.data(using: .utf8) else {
             throw ClaudeError.invalidJSON
         }
 

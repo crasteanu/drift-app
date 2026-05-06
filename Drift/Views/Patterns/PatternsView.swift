@@ -103,6 +103,12 @@ struct PatternsView: View {
                 .foregroundColor(.white.opacity(0.6))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
+
+            Text("Unlock: recurring symbols · emotional arc · dominant feelings")
+                .font(.outfit(12))
+                .foregroundColor(.driftTeal.opacity(0.6))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
         }
         .padding(24)
         .background(Color.driftCard)
@@ -145,7 +151,7 @@ struct PatternsView: View {
 
     @ViewBuilder
     private var emotionalArcChart: some View {
-        let abbr = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        let abbr = Calendar.current.shortStandaloneMonthSymbols
         VStack(alignment: .leading, spacing: 12) {
             Text("Emotional Arc")
                 .font(.outfit(14, weight: .semibold))
@@ -157,6 +163,10 @@ struct PatternsView: View {
                         .foregroundStyle(Color.driftCoral.opacity(0.5))
                     AreaMark(x: .value("Month", abbr[point.month - 1]), y: .value("Calm", point.calm))
                         .foregroundStyle(Color.driftTagGreen.opacity(0.5))
+                    AreaMark(x: .value("Month", abbr[point.month - 1]), y: .value("Vivid", point.vivid))
+                        .foregroundStyle(Color.white.opacity(0.25))
+                    AreaMark(x: .value("Month", abbr[point.month - 1]), y: .value("Uncertain", point.uncertain))
+                        .foregroundStyle(Color.driftAmber.opacity(0.5))
                 }
             }
             .frame(height: 140)

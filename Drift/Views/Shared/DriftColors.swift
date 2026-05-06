@@ -9,12 +9,12 @@ extension Color {
     static let driftTeal          = Color(hex: "#4DD9C0")
     static let driftCoral         = Color(hex: "#FF6B6B")
     static let driftAmber         = Color(hex: "#F59E0B")
-    static let driftTagTeal       = Color(hex: "#4DD9C0")
     static let driftTagGreen      = Color(hex: "#22C55E")
     static let driftTagPink       = Color(hex: "#EC4899")
     static let driftTagPurple     = Color(hex: "#8B5CF6")
     static let driftTagAmber      = Color(hex: "#F59E0B")
     static let driftTagBrown      = Color(hex: "#78716C")
+    static let driftYellow        = Color(hex: "#F5E642")
 
     init(hex: String) {
         let h = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -29,6 +29,9 @@ extension Color {
         case 8:
             (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
+            #if DEBUG
+            assertionFailure("Invalid hex color: '\(hex)'")
+            #endif
             (a, r, g, b) = (255, 0, 0, 0)
         }
         self.init(.sRGB, red: Double(r)/255, green: Double(g)/255, blue: Double(b)/255, opacity: Double(a)/255)
@@ -49,7 +52,7 @@ extension LinearGradient {
 }
 
 let tagColorPalette: [Color] = [
-    .driftTagTeal, .driftTagGreen, .driftTagPink,
+    .driftTeal, .driftTagGreen, .driftTagPink,
     .driftTagPurple, .driftTagAmber, .driftTagBrown, .white
 ]
 

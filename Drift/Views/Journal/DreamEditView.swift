@@ -65,11 +65,7 @@ struct DreamEditView: View {
                         .font(.outfit(12))
                         .foregroundColor(.white.opacity(0.4))
 
-                    HStack(spacing: 6) {
-                        modeButton("inner",    label: "🧠 Inner")
-                        modeButton("esoteric", label: "🔮 Esoteric")
-                        modeButton("both",     label: "✨ Both")
-                    }
+                    ModePickerView(selected: $mode)
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -134,27 +130,6 @@ struct DreamEditView: View {
             }
             .padding(16)
         }
-    }
-
-    private func modeButton(_ value: String, label: String) -> some View {
-        let active = mode == value
-        return Button {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) { mode = value }
-        } label: {
-            Text(label)
-                .font(.outfit(13, weight: active ? .semibold : .regular))
-                .foregroundColor(active ? .white : .white.opacity(0.45))
-                .padding(.horizontal, 14)
-                .padding(.vertical, 9)
-                .background(active ? Color.driftPurple : Color.driftCard)
-                .clipShape(Capsule())
-                .overlay {
-                    if !active {
-                        Capsule().stroke(Color.white.opacity(0.12), lineWidth: 1)
-                    }
-                }
-        }
-        .buttonStyle(.plain)
     }
 
     // MARK: - Preview view
@@ -287,7 +262,6 @@ struct DreamEditView: View {
         dream.journalPromptEsoteric = interp.journalPrompts.esoteric
         dream.emotionalSignature = interp.emotionalSignature
 
-        for old in dream.symbols { context.delete(old) }
         dream.symbols = interp.symbols.map {
             DreamSymbol(
                 name: $0.name,
