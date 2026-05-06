@@ -154,7 +154,7 @@ struct JournalView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Text("\(dreams.count) dreams · \(cachedTotalSymbols) symbols")
-                        .font(.outfit(12, weight: .medium))
+                        .font(.outfit(14, weight: .medium))
                         .foregroundColor(.driftTagGreen)
                 }
             }
