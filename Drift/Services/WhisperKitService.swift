@@ -50,6 +50,7 @@ final class WhisperKitService: ObservableObject {
         options.language = language == "auto" ? nil : language
         options.task = .transcribe
         options.chunkingStrategy = .vad
+        options.initialPrompt = "Jurnal de vise. Vis, somn, noapte, adormit, trezit, coșmar, personaj, loc, senzație, emoție, frică, bucurie, zbor, fugă, apă, casă, pădure, oraș."
 
         let resolvedPath = url.resolvingSymlinksInPath().path(percentEncoded: false)
         let results = try await wk.transcribe(audioPath: resolvedPath, decodeOptions: options)
