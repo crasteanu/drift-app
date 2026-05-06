@@ -36,6 +36,7 @@
 		BB002600000000000000001 /* DriftFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002600000000000000001 /* DriftFonts.swift */; };
 		BB002700000000000000001 /* TagChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002700000000000000001 /* TagChip.swift */; };
 		BB003100000000000000001 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003100000000000000001 /* WelcomeView.swift */; };
+		BB003200000000000000001 /* ModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003200000000000000001 /* ModePickerView.swift */; };
 		BB002800000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC002800000000000000001 /* Assets.xcassets */; };
 		BB002900000000000000001 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = PRD00100000000000000001 /* WhisperKit */; };
 		FF000100000000000000001 /* CormorantGaramond-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000100000000000000001 /* CormorantGaramond-Regular.ttf */; };
@@ -82,6 +83,7 @@
 		CC002600000000000000001 /* DriftFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftFonts.swift; sourceTree = "<group>"; };
 		CC002700000000000000001 /* TagChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagChip.swift; sourceTree = "<group>"; };
 		CC003100000000000000001 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		CC003200000000000000001 /* ModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePickerView.swift; sourceTree = "<group>"; };
 		CC002800000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC002900000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC000100000000000000001 /* CormorantGaramond-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-Regular.ttf"; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				CC002500000000000000001 /* DriftColors.swift */,
 				CC002600000000000000001 /* DriftFonts.swift */,
 				CC002700000000000000001 /* TagChip.swift */,
+				CC003200000000000000001 /* ModePickerView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				BB002600000000000000001 /* DriftFonts.swift in Sources */,
 				BB002700000000000000001 /* TagChip.swift in Sources */,
 				BB003100000000000000001 /* WelcomeView.swift in Sources */,
+				BB003200000000000000001 /* ModePickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
