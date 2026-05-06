@@ -21,8 +21,7 @@ final class WhisperKitService: ObservableObject {
         state = .downloading
 
         do {
-            // Download base model with progress reporting
-            let config = WhisperKitConfig(model: "base", verbose: false)
+            let config = WhisperKitConfig(model: "small", verbose: false)
             let wk = try await WhisperKit(config)
             whisperKit = wk
             state = .ready
@@ -50,6 +49,7 @@ final class WhisperKitService: ObservableObject {
         var options = DecodingOptions()
         options.language = language == "auto" ? nil : language
         options.task = .transcribe
+        options.chunkingStrategy = .vad
 
         let results = try await wk.transcribe(audioPath: url.path, decodeOptions: options)
         return results.map { $0.text }.joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
