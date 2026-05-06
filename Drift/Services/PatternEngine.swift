@@ -94,20 +94,19 @@ enum PatternEngine {
                 continue
             }
             func score(_ words: [String]) -> Double {
+                let lower = Set(words.map { $0.lowercased() })
                 let matched = monthDreams.filter { d in
-                    words.contains { word in
-                        d.emotionalSignature.contains { $0.localizedCaseInsensitiveContains(word) }
-                    }
+                    d.emotionalSignature.contains { lower.contains($0.lowercased()) }
                 }.count
                 return Double(matched) / Double(monthDreams.count)
             }
             let avgVividness = Double(monthDreams.map { $0.vividness }.reduce(0, +)) / Double(monthDreams.count) / 100.0
             points.append(.init(
                 month: month,
-                tension: score(["tension", "anxiet", "fear"]),
-                calm: score(["calm", "peace", "tranquil"]),
+                tension: score(["tension", "anxiety", "anxious", "fear", "afraid", "stress", "stressed"]),
+                calm: score(["calm", "peace", "tranquil", "peaceful", "serene", "relaxed"]),
                 vivid: avgVividness,
-                uncertain: score(["uncertain", "confus", "lost"])
+                uncertain: score(["uncertain", "confused", "confusion", "lost", "uncertainty", "unsure"])
             ))
         }
         return points

@@ -9,9 +9,14 @@ final class RecordingService: NSObject, ObservableObject {
     @Published var error: Error?
 
     private var recorder: AVAudioRecorder?
-    private var levelTimer: Timer?
-    private var durationTimer: Timer?
+    private var levelTask: Task<Void, Never>?
+    private var durationTask: Task<Void, Never>?
     private var startTime: Date?
+
+    deinit {
+        levelTask?.cancel()
+        durationTask?.cancel()
+    }
 
     var recordingURL: URL? {
         recorder?.url
@@ -50,28 +55,38 @@ final class RecordingService: NSObject, ObservableObject {
         startTime = Date()
         duration = 0
 
-        levelTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-            Task { @MainActor [weak self] in self?.updateLevel() }
+        levelTask = Task { [weak self] in
+            while !Task.isCancelled {
+                self?.updateLevel()
+                try? await Task.sleep(for: .milliseconds(50))
+            }
         }
-        durationTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                guard let self, let start = self.startTime else { return }
-                self.duration = Date().timeIntervalSince(start)
+
+        durationTask = Task { [weak self] in
+            while !Task.isCancelled {
+                if let self, let start = self.startTime {
+                    self.duration = Date().timeIntervalSince(start)
+                }
+                try? await Task.sleep(for: .milliseconds(100))
             }
         }
     }
 
     func stop() -> TimeInterval {
         recorder?.stop()
-        levelTimer?.invalidate()
-        durationTimer?.invalidate()
-        levelTimer = nil
-        durationTimer = nil
+        cancelPolling()
         isRecording = false
         audioLevel = 0
         let dur = duration
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         return dur
+    }
+
+    private func cancelPolling() {
+        levelTask?.cancel()
+        durationTask?.cancel()
+        levelTask = nil
+        durationTask = nil
     }
 
     private func updateLevel() {
@@ -88,18 +103,18 @@ extension RecordingService: AVAudioRecorderDelegate {
     nonisolated func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         guard !flag else { return }
         Task { @MainActor in
-            levelTimer?.invalidate(); durationTimer?.invalidate()
-            levelTimer = nil; durationTimer = nil
-            isRecording = false; audioLevel = 0
+            cancelPolling()
+            isRecording = false
+            audioLevel = 0
         }
     }
 
     nonisolated func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         Task { @MainActor in
             self.error = error
-            levelTimer?.invalidate(); durationTimer?.invalidate()
-            levelTimer = nil; durationTimer = nil
-            isRecording = false; audioLevel = 0
+            cancelPolling()
+            isRecording = false
+            audioLevel = 0
         }
     }
 }

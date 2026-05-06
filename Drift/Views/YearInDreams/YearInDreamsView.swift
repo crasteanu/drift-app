@@ -20,7 +20,7 @@ struct YearInDreamsView: View {
     }
 
     private var monthlyData: [(label: String, count: Int)] {
-        let abbr = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        let abbr = Calendar.current.shortStandaloneMonthSymbols
         return (1...12).map { month in
             let count = dreams.filter { calendar.component(.month, from: $0.date) == month }.count
             return (abbr[month - 1], count)
@@ -77,7 +77,7 @@ struct YearInDreamsView: View {
                 Text(yearStr.dropLast())
                     .font(.cormorant(72, weight: .bold))
                     .foregroundColor(.white)
-                Text(String(yearStr.last!))
+                Text(yearStr.last.map(String.init) ?? "")
                     .font(.cormorant(72, weight: .bold))
                     .foregroundColor(.driftTeal)
             }
