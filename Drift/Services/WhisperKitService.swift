@@ -21,7 +21,7 @@ final class WhisperKitService: ObservableObject {
         state = .downloading
 
         do {
-            let config = WhisperKitConfig(model: "small", verbose: false)
+            let config = WhisperKitConfig(model: "small", verbose: false, prewarm: true, load: true)
             let wk = try await WhisperKit(config)
             whisperKit = wk
             state = .ready
