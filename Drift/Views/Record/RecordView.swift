@@ -15,6 +15,7 @@ struct RecordView: View {
     @State private var processingState: ProcessingState = .idle
     @State private var recordingDuration: TimeInterval = 0
     @State private var orbShimmer = false
+    @State private var arcRotation: Double = 0
     @State private var interpretation: DreamInterpretation?
     @State private var error: String?
     @AppStorage("whisperLanguage") private var language = "ro"
@@ -75,9 +76,6 @@ struct RecordView: View {
         }
         .onDisappear {
             if case .done = processingState { resetState() }
-        }
-        .task {
-            await whisperService.prepare()
         }
     }
 
@@ -153,6 +151,20 @@ struct RecordView: View {
             .onAppear {
                 withAnimation(.easeInOut(duration: 0.85).repeatForever(autoreverses: true)) {
                     orbShimmer = true
+                }
+            }
+            .overlay {
+                if whisperService.isDownloading {
+                    Circle()
+                        .trim(from: 0, to: 0.25)
+                        .stroke(Color.driftTeal, style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                        .rotationEffect(.degrees(arcRotation))
+                        .onAppear {
+                            withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: false)) {
+                                arcRotation = 360
+                            }
+                        }
+                        .transition(.opacity)
                 }
             }
 

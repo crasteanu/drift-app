@@ -31,6 +31,7 @@ struct ContentView: View {
             DriftTabBar(selectedTab: $selectedTab)
         }
         .ignoresSafeArea(edges: .bottom)
+        .task { await whisperService.prepare() }
     }
 }
 
