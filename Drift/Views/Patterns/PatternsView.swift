@@ -63,8 +63,8 @@ struct PatternsView: View {
                 ToolbarItem(placement: .principal) {
                     VStack(spacing: 1) {
                         Text("Pattern Analysis")
-                            .font(.outfit(17, weight: .semibold))
-                            .foregroundColor(.white)
+                            .font(.cormorant(28, weight: .bold, italic: true))
+                            .foregroundStyle(LinearGradient.driftTealPurple)
                         Text("Inferred from your dream language · no self-reporting")
                             .font(.outfit(10))
                             .foregroundColor(.driftTeal)
