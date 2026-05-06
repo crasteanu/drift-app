@@ -66,7 +66,7 @@ struct PatternsView: View {
                             .font(.cormorant(28, weight: .bold, italic: true))
                             .foregroundStyle(LinearGradient.driftTealPurple)
                         Text("Inferred from your dream language · no self-reporting")
-                            .font(.outfit(10))
+                            .font(.outfit(12))
                             .foregroundColor(.driftTeal)
                     }
                 }
