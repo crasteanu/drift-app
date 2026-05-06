@@ -14,6 +14,7 @@ struct RecordView: View {
     @State private var transcript = ""
     @State private var processingState: ProcessingState = .idle
     @State private var recordingDuration: TimeInterval = 0
+    @State private var orbShimmer = false
     @State private var interpretation: DreamInterpretation?
     @State private var error: String?
     @AppStorage("whisperLanguage") private var language = "ro"
@@ -129,21 +130,6 @@ struct RecordView: View {
                 .padding(.horizontal, 32)
             }
 
-            // Download progress indicator
-            if whisperService.isDownloading {
-                VStack(spacing: 10) {
-                    Text("Preparing voice recognition…")
-                        .font(.outfit(13))
-                        .foregroundColor(.white.opacity(0.6))
-                    ProgressView()
-                        .tint(.driftTeal)
-                        .scaleEffect(1.2)
-                }
-                .padding(16)
-                .background(Color.driftCard)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-
             // Transcribing state
             if case .transcribing = processingState {
                 VStack(spacing: 8) {
@@ -162,6 +148,13 @@ struct RecordView: View {
                 onTap: handleOrbTap
             )
             .frame(width: 240, height: 240)
+            .opacity(whisperService.isDownloading ? (orbShimmer ? 0.38 : 0.65) : 1.0)
+            .allowsHitTesting(!whisperService.isDownloading)
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.85).repeatForever(autoreverses: true)) {
+                    orbShimmer = true
+                }
+            }
 
             if recorder.isRecording {
                 VStack(spacing: 8) {
