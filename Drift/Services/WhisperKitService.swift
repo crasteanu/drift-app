@@ -50,7 +50,9 @@ final class WhisperKitService: ObservableObject {
         options.language = language == "auto" ? nil : language
         options.task = .transcribe
         options.chunkingStrategy = .vad
-        options.initialPrompt = Self.dreamPrompt(for: language)
+        if let prompt = Self.dreamPrompt(for: language), let tokenizer = wk.tokenizer {
+            options.promptTokens = tokenizer.encode(text: prompt)
+        }
 
         let resolvedPath = url.resolvingSymlinksInPath().path(percentEncoded: false)
         let results = try await wk.transcribe(audioPath: resolvedPath, decodeOptions: options)
