@@ -17,12 +17,13 @@ struct ReflectionView: View {
     var onRetry: (() -> Void)?
     var onFinish: (() -> Void)?
 
+    // Dream saved by the caller (RecordView) — passed in so we never double-insert
+    var preloadedDream: Dream? = nil
+
     @Query(sort: \Dream.date, order: .reverse) private var allDreams: [Dream]
-    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @State private var sleepRating: Int = 0
     @State private var savedDream: Dream?
-    @State private var didSave = false
     @State private var showEdit = false
 
     private var displayMode: String { mode ?? dream?.interpretationMode ?? "both" }
@@ -133,9 +134,9 @@ struct ReflectionView: View {
             }
             .modifier(NavigationBarModifier(isInline: isInline, isReadOnly: isReadOnly, onEdit: { showEdit = true }, onDismiss: { dismiss() }))
             .onAppear {
-                if !isReadOnly, let interp = interpretation, !didSave {
-                    saveDream(from: interp)
-                    didSave = true
+                // Receive the already-saved Dream from the caller (no insert here)
+                if savedDream == nil, let pd = preloadedDream {
+                    savedDream = pd
                 }
             }
     }
@@ -173,30 +174,6 @@ struct ReflectionView: View {
         }
     }
 
-    private func saveDream(from interp: DreamInterpretation) {
-        let symbols = interp.symbols.map { s in
-            DreamSymbol(name: s.name, emoji: s.emoji, category: s.category, inner: s.inner, esoteric: s.esoteric)
-        }
-        let d = Dream(
-            transcript: transcript ?? "",
-            title: interp.title,
-            emojis: interp.emojis,
-            tags: interp.tags,
-            vividness: interp.vividness,
-            snippet: interp.snippet,
-            reflectionInner: interp.reflection.inner,
-            reflectionEsoteric: interp.reflection.esoteric,
-            pattern: interp.pattern,
-            symbols: symbols,
-            journalPromptInner: interp.journalPrompts.inner,
-            journalPromptEsoteric: interp.journalPrompts.esoteric,
-            emotionalSignature: interp.emotionalSignature,
-            interpretationMode: mode ?? "both",
-            recordingDuration: recordingDuration ?? 0
-        )
-        context.insert(d)
-        savedDream = d
-    }
 }
 
 private extension View {

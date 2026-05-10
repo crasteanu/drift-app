@@ -6,6 +6,7 @@ struct RecordView: View {
     @EnvironmentObject private var whisperService: WhisperKitService
     @StateObject private var recorder = RecordingService()
     @Query(sort: \Dream.date, order: .reverse) private var dreams: [Dream]
+    @Environment(\.modelContext) private var context
 
     @State private var mode: String = InterpretationMode.both.rawValue
     @State private var showTextInput = false
@@ -17,6 +18,7 @@ struct RecordView: View {
     @State private var orbShimmer = false
     @State private var arcRotation: Double = 0
     @State private var interpretation: DreamInterpretation?
+    @State private var savedDream: Dream?
     @State private var error: String?
     @AppStorage("whisperLanguage") private var language = "ro"
 
@@ -41,6 +43,7 @@ struct RecordView: View {
                         mode: mode,
                         recordingDuration: recordingDuration,
                         dreams: Array(dreams),
+                        preloadedDream: savedDream,
                         onRetry: resetState,
                         onFinish: resetState
                     )
@@ -73,6 +76,11 @@ struct RecordView: View {
                 default: break
                 }
             }
+        }
+        .onChange(of: recorder.error) { _, recorderError in
+            guard let recorderError else { return }
+            error = recorderError.localizedDescription
+            if case .recording = processingState { processingState = .idle }
         }
         .onDisappear {
             if case .done = processingState { resetState() }
@@ -436,6 +444,7 @@ struct RecordView: View {
         withAnimation(.easeInOut(duration: 0.3)) {
             processingState = .idle
             interpretation = nil
+            savedDream = nil
             transcript = ""
             manualText = ""
             recordingDuration = 0
@@ -458,12 +467,38 @@ struct RecordView: View {
                 language: language
             )
             interpretation = result
+            saveDream(from: result)
             withAnimation { processingState = .done }
         } catch {
             let msg = error.localizedDescription
             self.error = "Interpretation failed: \(msg)"
             withAnimation { processingState = .error(msg) }
         }
+    }
+
+    private func saveDream(from interp: DreamInterpretation) {
+        let symbols = interp.symbols.map { s in
+            DreamSymbol(name: s.name, emoji: s.emoji, category: s.category, inner: s.inner, esoteric: s.esoteric)
+        }
+        let d = Dream(
+            transcript: transcript,
+            title: interp.title,
+            emojis: interp.emojis,
+            tags: interp.tags,
+            vividness: interp.vividness,
+            snippet: interp.snippet,
+            reflectionInner: interp.reflection.inner,
+            reflectionEsoteric: interp.reflection.esoteric,
+            pattern: interp.pattern,
+            symbols: symbols,
+            journalPromptInner: interp.journalPrompts.inner,
+            journalPromptEsoteric: interp.journalPrompts.esoteric,
+            emotionalSignature: interp.emotionalSignature,
+            interpretationMode: mode,
+            recordingDuration: recordingDuration
+        )
+        context.insert(d)
+        savedDream = d
     }
 
     private func formatDuration(_ t: TimeInterval) -> String {

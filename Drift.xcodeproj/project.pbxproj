@@ -10,6 +10,7 @@
 		BB000100000000000000001 /* DriftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000100000000000000001 /* DriftApp.swift */; };
 		BB000200000000000000001 /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000200000000000000001 /* Dream.swift */; };
 		BB000300000000000000001 /* DreamSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000300000000000000001 /* DreamSymbol.swift */; };
+		BB003200000000000000001 /* DriftSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003200000000000000001 /* DriftSchema.swift */; };
 		BB000400000000000000001 /* ClaudeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000400000000000000001 /* ClaudeService.swift */; };
 		BB000500000000000000001 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000500000000000000001 /* RecordingService.swift */; };
 		BB000600000000000000001 /* WhisperKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000600000000000000001 /* WhisperKitService.swift */; };
@@ -57,6 +58,7 @@
 		CC000100000000000000001 /* DriftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftApp.swift; sourceTree = "<group>"; };
 		CC000200000000000000001 /* Dream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
 		CC000300000000000000001 /* DreamSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamSymbol.swift; sourceTree = "<group>"; };
+		CC003200000000000000001 /* DriftSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftSchema.swift; sourceTree = "<group>"; };
 		CC000400000000000000001 /* ClaudeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeService.swift; sourceTree = "<group>"; };
 		CC000500000000000000001 /* RecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
 		CC000600000000000000001 /* WhisperKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperKitService.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				CC000200000000000000001 /* Dream.swift */,
 				CC000300000000000000001 /* DreamSymbol.swift */,
+				CC003200000000000000001 /* DriftSchema.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				BB000100000000000000001 /* DriftApp.swift in Sources */,
 				BB000200000000000000001 /* Dream.swift in Sources */,
 				BB000300000000000000001 /* DreamSymbol.swift in Sources */,
+				BB003200000000000000001 /* DriftSchema.swift in Sources */,
 				BB000400000000000000001 /* ClaudeService.swift in Sources */,
 				BB000500000000000000001 /* RecordingService.swift in Sources */,
 				BB000600000000000000001 /* WhisperKitService.swift in Sources */,

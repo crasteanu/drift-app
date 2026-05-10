@@ -5,6 +5,28 @@ import SwiftData
 struct DriftApp: App {
     @AppStorage("hasSeenWelcome") private var hasSeenWelcome = false
 
+    /// Versioned container with migration plan so future schema changes
+    /// don't corrupt existing user data. Built once at app start.
+    private let container: ModelContainer = {
+        do {
+            return try ModelContainer(
+                for: Dream.self, DreamSymbol.self,
+                migrationPlan: DriftMigrationPlan.self
+            )
+        } catch {
+            // Store is unreadable — wipe and start fresh rather than crash-looping.
+            // This is a last-resort safety net; normal upgrades go through migration stages.
+            let config = ModelConfiguration(isStoredInMemoryOnly: false)
+            let url = config.url
+            try? FileManager.default.removeItem(at: url)
+            // swiftlint:disable:next force_try
+            return try! ModelContainer(
+                for: Dream.self, DreamSymbol.self,
+                migrationPlan: DriftMigrationPlan.self
+            )
+        }
+    }()
+
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -30,6 +52,6 @@ struct DriftApp: App {
             }
             .preferredColorScheme(.dark)
         }
-        .modelContainer(for: [Dream.self, DreamSymbol.self])
+        .modelContainer(container)
     }
 }
