@@ -52,7 +52,6 @@
 		FF000900000000000000001 /* Outfit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000900000000000000001 /* Outfit-Medium.ttf */; };
 		FF001000000000000000001 /* Outfit-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC001000000000000000001 /* Outfit-SemiBold.ttf */; };
 		FF001100000000000000001 /* Outfit-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC001100000000000000001 /* Outfit-Bold.ttf */; };
-		BB003300000000000000001 /* DriftStoreKit.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CC003300000000000000001 /* DriftStoreKit.storekit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -382,7 +381,6 @@
 				FF000900000000000000001 /* Outfit-Medium.ttf in Resources */,
 				FF001000000000000000001 /* Outfit-SemiBold.ttf in Resources */,
 				FF001100000000000000001 /* Outfit-Bold.ttf in Resources */,
-				BB003300000000000000001 /* DriftStoreKit.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
