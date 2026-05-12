@@ -1,6 +1,7 @@
 import StoreKit
 import Observation
 
+@MainActor
 @Observable
 final class StoreService {
     private(set) var products: [Product] = []
@@ -15,7 +16,7 @@ final class StoreService {
         await checkEntitlement()
         do {
             let fetched = try await Product.products(for: productIDs)
-            products = fetched.sorted { _, b in b.id.contains("monthly") }
+            products = fetched.sorted { a, _ in a.id.contains("yearly") }
         } catch {
             // products stays empty; paywall shows retry state
         }
@@ -40,7 +41,7 @@ final class StoreService {
         await checkEntitlement()
     }
 
-    func checkEntitlement() async {
+    private func checkEntitlement() async {
         var hasActive = false
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
@@ -55,9 +56,12 @@ final class StoreService {
 
     func listenForTransactions() async {
         for await result in Transaction.updates {
-            if case .verified(let transaction) = result {
+            switch result {
+            case .verified(let transaction):
                 await transaction.finish()
                 await checkEntitlement()
+            case .unverified(let transaction, _):
+                await transaction.finish()
             }
         }
     }
