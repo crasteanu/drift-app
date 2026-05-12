@@ -100,7 +100,7 @@
 		FC000900000000000000001 /* Outfit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Medium.ttf"; sourceTree = "<group>"; };
 		FC001000000000000000001 /* Outfit-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-SemiBold.ttf"; sourceTree = "<group>"; };
 		FC001100000000000000001 /* Outfit-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Bold.ttf"; sourceTree = "<group>"; };
-		CC003300000000000000001 /* DriftStoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = DriftStoreKit.storekit; sourceTree = "<group>"; };
+		CC003300000000000000001 /* DriftStoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DriftStoreKit.storekit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
