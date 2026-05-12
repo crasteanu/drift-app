@@ -74,6 +74,10 @@ struct PaywallView: View {
             selectedProduct = store.products.first { $0.id.contains("yearly") }
                 ?? store.products.first
         }
+        .onChange(of: store.products) { _, products in
+            guard selectedProduct == nil else { return }
+            selectedProduct = products.first { $0.id.contains("yearly") } ?? products.first
+        }
     }
 
     // MARK: - Sections
@@ -189,7 +193,7 @@ struct PaywallView: View {
         Button {
             guard let product = selectedProduct else { return }
             isPurchasing = true
-            Task {
+            Task { @MainActor in
                 do {
                     try await store.purchase(product)
                 } catch {
@@ -225,7 +229,7 @@ struct PaywallView: View {
         HStack(spacing: 16) {
             Button {
                 isRestoring = true
-                Task {
+                Task { @MainActor in
                     do {
                         try await store.restorePurchases()
                         if !store.isSubscribed {
