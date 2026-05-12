@@ -1,0 +1,63 @@
+{
+  "identifier" : "DriftStoreKit",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "group.drift.pro",
+      "localizations" : [],
+      "name" : "Drift Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlimited dream interpretations and pattern analysis",
+              "displayName" : "Drift Pro Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.driftapp.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Drift Pro Monthly",
+          "subscriptionGroupID" : "group.drift.pro",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "BBBBBBBB-BBBB-BBBB-BBBB-BBBBBBBBBBBB",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlimited dream interpretations and pattern analysis",
+              "displayName" : "Drift Pro Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.driftapp.pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Drift Pro Yearly",
+          "subscriptionGroupID" : "group.drift.pro",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}
