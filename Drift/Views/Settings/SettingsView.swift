@@ -11,6 +11,8 @@ struct SettingsView: View {
     @AppStorage("interpretationCount") private var interpretationCount: Int = 0
     @State private var showPaywall = false
     @State private var isRestoring = false
+    @State private var restoreErrorMessage: String?
+    @State private var showRestoreError = false
 
     @AppStorage("whisperLanguage") private var language = "ro"
     @AppStorage("morningReminderEnabled") private var reminderEnabled = false
@@ -165,7 +167,16 @@ struct SettingsView: View {
                             Button {
                                 isRestoring = true
                                 Task {
-                                    try? await storeService.restorePurchases()
+                                    do {
+                                        try await storeService.restorePurchases()
+                                        if !storeService.isSubscribed {
+                                            restoreErrorMessage = "No active subscription found."
+                                            showRestoreError = true
+                                        }
+                                    } catch {
+                                        restoreErrorMessage = error.localizedDescription
+                                        showRestoreError = true
+                                    }
                                     isRestoring = false
                                 }
                             } label: {
@@ -338,6 +349,11 @@ struct SettingsView: View {
         }
         .fullScreenCover(isPresented: $showPaywall) {
             PaywallView(context: .interpretationLimit)
+        }
+        .alert("Restore Failed", isPresented: $showRestoreError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(restoreErrorMessage ?? "Please try again.")
         }
     }
 

@@ -237,6 +237,7 @@ struct DreamEditView: View {
             showPaywall = true
             return
         }
+        interpretationCount += 1
 
         errorMessage = nil
         let previous = allDreams.filter { $0.id != dream.id }.prefix(3)
@@ -259,7 +260,6 @@ struct DreamEditView: View {
     }
 
     private func applyInterpretation(_ interp: DreamInterpretation) {
-        interpretationCount += 1
         dream.transcript = transcript
         dream.interpretationMode = mode
         dream.title = interp.title

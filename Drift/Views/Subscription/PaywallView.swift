@@ -40,7 +40,9 @@ struct PaywallView: View {
                         } else {
                             planCards
                         }
-                        ctaButton
+                        if !store.products.isEmpty {
+                            ctaButton
+                        }
                         footerLinks
                         Color.clear.frame(height: 20)
                     }
@@ -175,8 +177,10 @@ struct PaywallView: View {
     }
 
     private func monthlyBreakdown(for product: Product) -> String {
-        let monthly = product.price / 12
-        return product.priceFormatStyle.format(monthly) + "/mo"
+        var monthly = product.price / 12
+        var rounded = Decimal()
+        NSDecimalRound(&rounded, &monthly, 2, .plain)
+        return product.priceFormatStyle.format(rounded) + "/" + NSLocalizedString("mo", comment: "Month abbreviation in paywall price breakdown")
     }
 
     private var retryButton: some View {

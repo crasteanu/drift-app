@@ -16,7 +16,7 @@ final class StoreService {
         await checkEntitlement()
         do {
             let fetched = try await Product.products(for: productIDs)
-            products = fetched.sorted { a, _ in a.id.contains("yearly") }
+            products = fetched.sorted { a, b in a.id.contains("yearly") && !b.id.contains("yearly") }
         } catch {
             // products stays empty; paywall shows retry state
         }
@@ -46,12 +46,17 @@ final class StoreService {
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
                productIDs.contains(transaction.productID),
-               transaction.revocationDate == nil {
+               transaction.revocationDate == nil,
+               transaction.expirationDate.map({ $0 > Date() }) ?? true {
                 hasActive = true
                 break
             }
         }
+        let wasSubscribed = isSubscribed
         isSubscribed = hasActive
+        if wasSubscribed && !hasActive {
+            UserDefaults.standard.set(0, forKey: "interpretationCount")
+        }
     }
 
     func listenForTransactions() async {
@@ -60,7 +65,8 @@ final class StoreService {
             case .verified(let transaction):
                 await transaction.finish()
                 await checkEntitlement()
-            case .unverified(let transaction, _):
+            case .unverified(let transaction, let error):
+                print("[StoreService] Unverified transaction \(transaction.id): \(error)")
                 await transaction.finish()
             }
         }
