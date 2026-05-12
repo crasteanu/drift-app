@@ -7,6 +7,9 @@ struct DreamEditView: View {
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \Dream.date, order: .reverse) private var allDreams: [Dream]
     @AppStorage("whisperLanguage") private var language = "ro"
+    @Environment(StoreService.self) private var storeService
+    @AppStorage("interpretationCount") private var interpretationCount: Int = 0
+    @State private var showPaywall = false
 
     @State private var transcript: String = ""
     @State private var mode: String = "both"
@@ -51,6 +54,9 @@ struct DreamEditView: View {
         .onAppear {
             transcript = dream.transcript
             mode = dream.interpretationMode
+        }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(context: .interpretationLimit)
         }
     }
 
@@ -227,6 +233,11 @@ struct DreamEditView: View {
     }
 
     private func reinterpret() async {
+        if !storeService.isSubscribed && interpretationCount >= 7 {
+            showPaywall = true
+            return
+        }
+
         errorMessage = nil
         let previous = allDreams.filter { $0.id != dream.id }.prefix(3)
         withAnimation { isInterpreting = true }
@@ -237,6 +248,7 @@ struct DreamEditView: View {
                 previousDreams: Array(previous),
                 language: language
             )
+            interpretationCount += 1
             withAnimation {
                 isInterpreting = false
                 pendingInterpretation = result
