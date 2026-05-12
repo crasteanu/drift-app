@@ -248,7 +248,6 @@ struct DreamEditView: View {
                 previousDreams: Array(previous),
                 language: language
             )
-            interpretationCount += 1
             withAnimation {
                 isInterpreting = false
                 pendingInterpretation = result
@@ -260,6 +259,7 @@ struct DreamEditView: View {
     }
 
     private func applyInterpretation(_ interp: DreamInterpretation) {
+        interpretationCount += 1
         dream.transcript = transcript
         dream.interpretationMode = mode
         dream.title = interp.title
