@@ -21,6 +21,9 @@ struct RecordView: View {
     @State private var savedDream: Dream?
     @State private var error: String?
     @AppStorage("whisperLanguage") private var language = "ro"
+    @Environment(StoreService.self) private var storeService
+    @AppStorage("interpretationCount") private var interpretationCount: Int = 0
+    @State private var showPaywall = false
 
     enum ProcessingState {
         case idle, recording, transcribing, transcribed, interpreting, done, error(String)
@@ -43,9 +46,9 @@ struct RecordView: View {
                         mode: mode,
                         recordingDuration: recordingDuration,
                         dreams: Array(dreams),
-                        preloadedDream: savedDream,
                         onRetry: resetState,
-                        onFinish: resetState
+                        onFinish: resetState,
+                        preloadedDream: savedDream
                     )
                     .transition(.opacity)
                 } else if case .transcribed = processingState {
@@ -77,13 +80,17 @@ struct RecordView: View {
                 }
             }
         }
-        .onChange(of: recorder.error) { _, recorderError in
+        .onReceive(recorder.$error) { recorderError in
             guard let recorderError else { return }
             error = recorderError.localizedDescription
             if case .recording = processingState { processingState = .idle }
         }
         .onDisappear {
             if case .done = processingState { resetState() }
+        }
+        .task { await recorder.warmUp() }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(context: .interpretationLimit)
         }
     }
 
@@ -141,7 +148,7 @@ struct RecordView: View {
                 VStack(spacing: 8) {
                     ProgressView()
                         .tint(.driftTeal)
-                    Text("Transcribing…")
+                    Text(whisperService.isDownloading ? "Preparing model…" : "Transcribing…")
                         .font(.outfit(13))
                         .foregroundColor(.driftTeal)
                 }
@@ -154,8 +161,7 @@ struct RecordView: View {
                 onTap: handleOrbTap
             )
             .frame(width: 240, height: 240)
-            .opacity(whisperService.isDownloading ? (orbShimmer ? 0.38 : 0.65) : 1.0)
-            .allowsHitTesting(!whisperService.isDownloading)
+            .opacity(whisperService.isDownloading && !recorder.isRecording ? (orbShimmer ? 0.55 : 0.75) : 1.0)
             .onAppear {
                 withAnimation(.easeInOut(duration: 0.85).repeatForever(autoreverses: true)) {
                     orbShimmer = true
@@ -177,7 +183,7 @@ struct RecordView: View {
             }
 
             if recorder.isRecording {
-                VStack(spacing: 8) {
+                VStack(spacing: 16) {
                     HStack(spacing: 6) {
                         Circle()
                             .fill(Color.driftCoral)
@@ -199,6 +205,21 @@ struct RecordView: View {
                             .font(.outfit(13))
                             .foregroundColor(.white.opacity(0.35))
                     }
+
+                    Button(action: stopAndTranscribe) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "stop.fill")
+                                .font(.system(size: 12))
+                            Text("Stop Recording")
+                                .font(.outfit(15, weight: .semibold))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 28)
+                        .padding(.vertical, 13)
+                        .background(Color.driftCoral)
+                        .clipShape(Capsule())
+                    }
+                    .buttonStyle(.plain)
                 }
                 .transition(.opacity)
             }
@@ -356,7 +377,12 @@ struct RecordView: View {
                         .multilineTextAlignment(.center)
                 }
 
-                // Interpret button
+                if !storeService.isSubscribed && interpretationCount < 7 {
+                    Text("\(7 - interpretationCount) free interpretation\(7 - interpretationCount == 1 ? "" : "s") left")
+                        .font(.outfit(12))
+                        .foregroundColor(.driftAmber)
+                }
+
                 Button {
                     Task { await interpretDream() }
                 } label: {
@@ -399,10 +425,11 @@ struct RecordView: View {
     private func startRecording() {
         error = nil
         Task {
-            let granted = await recorder.requestPermission()
-            guard granted else {
-                error = "Microphone access required. Enable it in Settings."
-                return
+            if !recorder.isWarm {
+                guard await recorder.requestPermission() else {
+                    error = "Microphone access required. Enable it in Settings."
+                    return
+                }
             }
             do {
                 try await recorder.start()
@@ -416,7 +443,13 @@ struct RecordView: View {
 
     private func stopAndTranscribe() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        let peak = recorder.peakAudioLevel
         recordingDuration = recorder.stop()
+        guard peak > 0.08 else {
+            self.error = "Nothing was picked up. Please try again."
+            processingState = .idle
+            return
+        }
         guard let url = recorder.recordingURL else {
             self.error = "Recording file not found"
             return
@@ -458,6 +491,12 @@ struct RecordView: View {
             processingState = .idle
             return
         }
+
+        if !storeService.isSubscribed && interpretationCount >= 7 {
+            showPaywall = true
+            return
+        }
+
         withAnimation { processingState = .interpreting }
         do {
             let result = try await ClaudeService.interpret(
@@ -468,6 +507,7 @@ struct RecordView: View {
             )
             interpretation = result
             saveDream(from: result)
+            interpretationCount += 1
             withAnimation { processingState = .done }
         } catch {
             let msg = error.localizedDescription
