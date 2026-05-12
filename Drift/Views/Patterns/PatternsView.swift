@@ -5,6 +5,8 @@ import Charts
 struct PatternsView: View {
     @Query(sort: \Dream.date, order: .reverse) private var dreams: [Dream]
     @State private var showMoreInfo = false
+    @Environment(StoreService.self) private var storeService
+    @State private var showPaywall = false
 
     private let requiredDreams = 5
 
@@ -19,37 +21,41 @@ struct PatternsView: View {
 
                 ScrollView {
                     VStack(spacing: 16) {
-                        // Info card
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack(alignment: .top) {
-                                Text("Patterns emerge from your words alone — no questionnaires.")
-                                    .font(.outfit(13, weight: .semibold))
-                                    .foregroundColor(showMoreInfo ? .driftTeal : .white.opacity(0.7))
-                                Spacer()
-                                Button(showMoreInfo ? "Less" : "More") {
-                                    withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
-                                        showMoreInfo.toggle()
-                                    }
-                                }
-                                .font(.outfit(13, weight: .semibold))
-                                .foregroundColor(.driftTeal)
-                            }
-
-                            if showMoreInfo {
-                                Text("Drift reads the emotional tone, imagery, and language of every dream you record. The charts and clusters below reflect what your unconscious keeps returning to — inferred entirely from your own words.")
-                                    .font(.outfit(13))
-                                    .foregroundColor(.driftTeal)
-                                    .transition(.opacity.combined(with: .move(edge: .top)))
-                            }
-                        }
-                        .padding(16)
-                        .background(Color.driftCard)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-
-                        if dreams.count < requiredDreams {
-                            lockedView
+                        if !storeService.isSubscribed {
+                            proLockedView
                         } else {
-                            unlockedContent
+                            // Info card
+                            VStack(alignment: .leading, spacing: 10) {
+                                HStack(alignment: .top) {
+                                    Text("Patterns emerge from your words alone — no questionnaires.")
+                                        .font(.outfit(13, weight: .semibold))
+                                        .foregroundColor(showMoreInfo ? .driftTeal : .white.opacity(0.7))
+                                    Spacer()
+                                    Button(showMoreInfo ? "Less" : "More") {
+                                        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                                            showMoreInfo.toggle()
+                                        }
+                                    }
+                                    .font(.outfit(13, weight: .semibold))
+                                    .foregroundColor(.driftTeal)
+                                }
+
+                                if showMoreInfo {
+                                    Text("Drift reads the emotional tone, imagery, and language of every dream you record. The charts and clusters below reflect what your unconscious keeps returning to — inferred entirely from your own words.")
+                                        .font(.outfit(13))
+                                        .foregroundColor(.driftTeal)
+                                        .transition(.opacity.combined(with: .move(edge: .top)))
+                                }
+                            }
+                            .padding(16)
+                            .background(Color.driftCard)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+
+                            if dreams.count < requiredDreams {
+                                lockedView
+                            } else {
+                                unlockedContent
+                            }
                         }
 
                         Color.clear.frame(height: 90)
@@ -72,6 +78,41 @@ struct PatternsView: View {
                 }
             }
         }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(context: .patternsLock)
+        }
+    }
+
+    @ViewBuilder
+    private var proLockedView: some View {
+        VStack(spacing: 20) {
+            Text("🔒")
+                .font(.system(size: 48))
+            Text("Patterns is Pro")
+                .font(.outfit(18, weight: .semibold))
+                .foregroundColor(.white)
+            Text("Discover recurring symbols, themes, and emotions across your entire dream journal.")
+                .font(.outfit(14))
+                .foregroundColor(.white.opacity(0.6))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 16)
+            Button {
+                showPaywall = true
+            } label: {
+                Text("Unlock with Pro")
+                    .font(.outfit(15, weight: .semibold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color.driftPurple)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 8)
+        }
+        .padding(24)
+        .background(Color.driftCard)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
     @ViewBuilder

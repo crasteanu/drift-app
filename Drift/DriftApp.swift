@@ -4,9 +4,8 @@ import SwiftData
 @main
 struct DriftApp: App {
     @AppStorage("hasSeenWelcome") private var hasSeenWelcome = false
+    @State private var storeService = StoreService()
 
-    /// Versioned container with migration plan so future schema changes
-    /// don't corrupt existing user data. Built once at app start.
     private let container: ModelContainer = {
         do {
             return try ModelContainer(
@@ -14,12 +13,9 @@ struct DriftApp: App {
                 migrationPlan: DriftMigrationPlan.self
             )
         } catch {
-            // Store is unreadable — wipe and start fresh rather than crash-looping.
-            // This is a last-resort safety net; normal upgrades go through migration stages.
             let config = ModelConfiguration(isStoredInMemoryOnly: false)
             let url = config.url
             try? FileManager.default.removeItem(at: url)
-            // swiftlint:disable:next force_try
             return try! ModelContainer(
                 for: Dream.self, DreamSymbol.self,
                 migrationPlan: DriftMigrationPlan.self
@@ -33,7 +29,6 @@ struct DriftApp: App {
         appearance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         appearance.shadowColor = .clear
         appearance.shadowImage = UIImage()
-        // White tint so toolbar buttons/titles render light without needing per-view toolbarColorScheme
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -51,6 +46,9 @@ struct DriftApp: App {
                 }
             }
             .preferredColorScheme(.dark)
+            .environment(storeService)
+            .task { await storeService.load() }
+            .task { await storeService.listenForTransactions() }
         }
         .modelContainer(container)
     }

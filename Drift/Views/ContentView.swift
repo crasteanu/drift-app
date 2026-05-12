@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(StoreService.self) private var storeService
     @State private var selectedTab: Tab = .tonight
     @StateObject private var whisperService = WhisperKitService()
+    @State private var showPaywall = false
 
     enum Tab: Int, CaseIterable {
         case tonight, record, journal, patterns
@@ -28,15 +30,24 @@ struct ContentView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
 
-            DriftTabBar(selectedTab: $selectedTab)
+            DriftTabBar(
+                selectedTab: $selectedTab,
+                isSubscribed: storeService.isSubscribed,
+                onLockedPatternsTap: { showPaywall = true }
+            )
         }
         .ignoresSafeArea(edges: .bottom)
         .task { await whisperService.prepare() }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(context: .patternsLock)
+        }
     }
 }
 
 struct DriftTabBar: View {
     @Binding var selectedTab: ContentView.Tab
+    var isSubscribed: Bool = true
+    var onLockedPatternsTap: () -> Void = {}
 
     struct TabItem {
         let tab: ContentView.Tab
@@ -45,24 +56,42 @@ struct DriftTabBar: View {
     }
 
     let items: [TabItem] = [
-        .init(tab: .tonight,  icon: "moon.stars.fill",    label: "Tonight"),
-        .init(tab: .record,   icon: "mic.fill",           label: "Record"),
-        .init(tab: .journal,  icon: "book.fill",          label: "Journal"),
-        .init(tab: .patterns, icon: "sparkles",            label: "Patterns"),
+        .init(tab: .tonight,  icon: "moon.stars.fill", label: "Tonight"),
+        .init(tab: .record,   icon: "mic.fill",        label: "Record"),
+        .init(tab: .journal,  icon: "book.fill",       label: "Journal"),
+        .init(tab: .patterns, icon: "sparkles",         label: "Patterns"),
     ]
 
     var body: some View {
         HStack(spacing: 0) {
             ForEach(items, id: \.label) { item in
+                let isPatternLocked = item.tab == .patterns && !isSubscribed
                 Button {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                        selectedTab = item.tab
+                    if isPatternLocked {
+                        onLockedPatternsTap()
+                    } else {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            selectedTab = item.tab
+                        }
                     }
                 } label: {
                     let active = selectedTab == item.tab
                     VStack(spacing: 3) {
-                        Image(systemName: item.icon)
-                            .font(.system(size: 18, weight: .medium))
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: item.icon)
+                                .font(.system(size: 18, weight: .medium))
+                            if isPatternLocked {
+                                Image(systemName: "lock.fill")
+                                    .font(.system(size: 8, weight: .bold))
+                                    .foregroundColor(.driftAmber)
+                                    .background(
+                                        Circle()
+                                            .fill(Color.driftBackground)
+                                            .padding(-2)
+                                    )
+                                    .offset(x: 7, y: -5)
+                            }
+                        }
                         Text(item.label)
                             .font(.outfit(10, weight: .medium))
                     }
