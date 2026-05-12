@@ -41,6 +41,7 @@
 		BB003200000000000000001 /* ModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003200000000000000001 /* ModePickerView.swift */; };
 		BB003200000000000000003 /* DriftSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003200000000000000003 /* DriftSchema.swift */; };
 		BB003400000000000000001 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003400000000000000001 /* StoreService.swift */; };
+		BB003500000000000000001 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003500000000000000001 /* PaywallView.swift */; };
 		FF000100000000000000001 /* CormorantGaramond-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000100000000000000001 /* CormorantGaramond-Regular.ttf */; };
 		FF000200000000000000001 /* CormorantGaramond-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000200000000000000001 /* CormorantGaramond-Italic.ttf */; };
 		FF000300000000000000001 /* CormorantGaramond-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000300000000000000001 /* CormorantGaramond-SemiBold.ttf */; };
@@ -65,6 +66,7 @@
 		CC000700000000000000001 /* MoonPhaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseService.swift; sourceTree = "<group>"; };
 		CC000800000000000000001 /* PatternEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEngine.swift; sourceTree = "<group>"; };
 		CC003400000000000000001 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		CC003500000000000000001 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		CC000900000000000000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CC001000000000000000001 /* TonightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonightView.swift; sourceTree = "<group>"; };
 		CC001100000000000000001 /* MoonPhaseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseCard.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				GG001200000000000000001 /* Settings */,
 				GG001400000000000000001 /* Shared */,
 				GG001600000000000000001 /* Welcome */,
+				GG001800000000000000001 /* Subscription */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +298,14 @@
 				CC003100000000000000001 /* WelcomeView.swift */,
 			);
 			path = Welcome;
+			sourceTree = "<group>";
+		};
+		GG001800000000000000001 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				CC003500000000000000001 /* PaywallView.swift */,
+			);
+			path = Subscription;
 			sourceTree = "<group>";
 		};
 		GG001700000000000000001 /* Configuration */ = {
@@ -423,6 +434,7 @@
 				BB002700000000000000001 /* TagChip.swift in Sources */,
 				BB003100000000000000001 /* WelcomeView.swift in Sources */,
 				BB003200000000000000001 /* ModePickerView.swift in Sources */,
+				BB003500000000000000001 /* PaywallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
