@@ -7,6 +7,11 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Query private var dreams: [Dream]
 
+    @Environment(StoreService.self) private var storeService
+    @AppStorage("interpretationCount") private var interpretationCount: Int = 0
+    @State private var showPaywall = false
+    @State private var isRestoring = false
+
     @AppStorage("whisperLanguage") private var language = "ro"
     @AppStorage("morningReminderEnabled") private var reminderEnabled = false
     @AppStorage("reminderHour") private var reminderHour = 8
@@ -103,6 +108,84 @@ struct SettingsView: View {
             ZStack {
                 Color.driftBackground.ignoresSafeArea()
                 List {
+                    // Subscription
+                    Section {
+                        if storeService.isSubscribed {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("drift pro")
+                                        .font(.outfit(14, weight: .semibold))
+                                        .foregroundColor(.white)
+                                    Text("Active")
+                                        .font(.outfit(12))
+                                        .foregroundColor(.driftTeal)
+                                }
+                                Spacer()
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.driftTeal)
+                                    .font(.system(size: 18))
+                            }
+                            .listRowBackground(Color.driftCard)
+
+                            Button {
+                                UIApplication.shared.open(
+                                    URL(string: "https://apps.apple.com/account/subscriptions")!
+                                )
+                            } label: {
+                                Label("Manage Subscription", systemImage: "arrow.up.right")
+                                    .font(.outfit(14))
+                                    .foregroundColor(.white)
+                            }
+                            .listRowBackground(Color.driftCard)
+                        } else {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Free Plan")
+                                        .font(.outfit(14, weight: .semibold))
+                                        .foregroundColor(.white)
+                                    let used = min(interpretationCount, 7)
+                                    let remaining = max(0, 7 - interpretationCount)
+                                    Text("\(used) used · \(remaining) left")
+                                        .font(.outfit(12))
+                                        .foregroundColor(.white.opacity(0.5))
+                                }
+                                Spacer()
+                            }
+                            .listRowBackground(Color.driftCard)
+
+                            Button {
+                                showPaywall = true
+                            } label: {
+                                Label("Unlock Pro", systemImage: "sparkles")
+                                    .font(.outfit(14, weight: .medium))
+                                    .foregroundColor(.driftPurple)
+                            }
+                            .listRowBackground(Color.driftCard)
+
+                            Button {
+                                isRestoring = true
+                                Task {
+                                    try? await storeService.restorePurchases()
+                                    isRestoring = false
+                                }
+                            } label: {
+                                HStack {
+                                    Label("Restore Purchases", systemImage: "arrow.clockwise")
+                                        .font(.outfit(14))
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    if isRestoring { ProgressView().tint(.white) }
+                                }
+                            }
+                            .listRowBackground(Color.driftCard)
+                            .disabled(isRestoring)
+                        }
+                    } header: {
+                        Text("Subscription")
+                            .font(.outfit(13, weight: .semibold))
+                            .foregroundColor(.white.opacity(0.4))
+                    }
+
                     // Voice language
                     Section {
                         Button {
@@ -252,6 +335,9 @@ struct SettingsView: View {
         .task(id: dreams.count) {
             storageSizeText = await computeStorageSize()
             symbolCountText = "\(PatternEngine.allSymbolLibrary(from: dreams).count)"
+        }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(context: .interpretationLimit)
         }
     }
 
