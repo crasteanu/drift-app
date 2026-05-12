@@ -40,6 +40,7 @@
 		BB003100000000000000001 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003100000000000000001 /* WelcomeView.swift */; };
 		BB003200000000000000001 /* ModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003200000000000000001 /* ModePickerView.swift */; };
 		BB003200000000000000003 /* DriftSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003200000000000000003 /* DriftSchema.swift */; };
+		BB003400000000000000001 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC003400000000000000001 /* StoreService.swift */; };
 		FF000100000000000000001 /* CormorantGaramond-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000100000000000000001 /* CormorantGaramond-Regular.ttf */; };
 		FF000200000000000000001 /* CormorantGaramond-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000200000000000000001 /* CormorantGaramond-Italic.ttf */; };
 		FF000300000000000000001 /* CormorantGaramond-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC000300000000000000001 /* CormorantGaramond-SemiBold.ttf */; };
@@ -64,6 +65,7 @@
 		CC000600000000000000001 /* WhisperKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperKitService.swift; sourceTree = "<group>"; };
 		CC000700000000000000001 /* MoonPhaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseService.swift; sourceTree = "<group>"; };
 		CC000800000000000000001 /* PatternEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEngine.swift; sourceTree = "<group>"; };
+		CC003400000000000000001 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		CC000900000000000000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CC001000000000000000001 /* TonightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonightView.swift; sourceTree = "<group>"; };
 		CC001100000000000000001 /* MoonPhaseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseCard.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				CC000600000000000000001 /* WhisperKitService.swift */,
 				CC000700000000000000001 /* MoonPhaseService.swift */,
 				CC000800000000000000001 /* PatternEngine.swift */,
+				CC003400000000000000001 /* StoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				BB000600000000000000001 /* WhisperKitService.swift in Sources */,
 				BB000700000000000000001 /* MoonPhaseService.swift in Sources */,
 				BB000800000000000000001 /* PatternEngine.swift in Sources */,
+				BB003400000000000000001 /* StoreService.swift in Sources */,
 				BB000900000000000000001 /* ContentView.swift in Sources */,
 				BB001000000000000000001 /* TonightView.swift in Sources */,
 				BB001100000000000000001 /* MoonPhaseCard.swift in Sources */,
